@@ -62,8 +62,8 @@ class MenuResource extends Resource
             Select::make(__('novaMenuBuilder.menuResourceSingularLabel'), 'slug')
                 ->options($menuOptions)
                 ->onlyOnForms()
-                ->creationRules('required', 'max:255', "unique_menu:$menusTableName,slug,NULL,id")
-                ->updateRules('required', 'max:255', "unique_menu:$menusTableName,slug,{{resourceId}},id"),
+                ->creationRules('required', 'max:255')
+                ->updateRules('required', 'max:255'),
 
             Text::make(__('novaMenuBuilder.menuResourceSingularLabel'), 'slug', function ($key) {
                 $menu = MenuBuilder::getMenus()[$key] ?? null;

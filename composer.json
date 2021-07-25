@@ -1,5 +1,5 @@
 {
-  "name": "optimistdigital/nova-menu-builder",
+  "name": "marshmallow/nova-menu-builder",
   "description": "This Laravel Nova package allows you to create and manage menus and menu items.",
   "keywords": [
     "laravel",
@@ -24,6 +24,11 @@
     {
       "name": "Optimist Digital",
       "email": "info@optimistdigital.com",
+      "role": "Maintainer"
+    },
+    {
+      "name": "Stef van Esch",
+      "email": "stef@marshmallow.dev",
       "role": "Maintainer"
     }
   ],
