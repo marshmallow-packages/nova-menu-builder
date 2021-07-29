@@ -97,7 +97,7 @@ class MenuBuilder extends Tool
 
     public static function getRulesFromMenuLinkable(?string $menuLinkableClass)
     {
-        $menusTableName = MenuBuilder::getMenusTableName();
+        $menusTableName = MenuBuilder::getMenusTableNameWithConnection();
 
         return array_merge([
             'menu_id' => "required|exists:$menusTableName,id",
@@ -115,6 +115,22 @@ class MenuBuilder extends Tool
     public static function getMenuResource()
     {
         return config('nova-menu.resource', \OptimistDigital\MenuBuilder\Nova\Resources\MenuResource::class);
+    }
+
+    public static function getMenusTableNameWithConnection()
+    {
+        $table_name = self::getMenusConnectionName();
+        $connection = self::getMenusTableName();
+        if ($connection) {
+            $table_name = "{$connection}.{$table_name}";
+        }
+
+        return $table_name;
+    }
+
+    public static function getMenusConnectionName()
+    {
+        return config('nova-menu.connection', null);
     }
 
     public static function getMenusTableName()
