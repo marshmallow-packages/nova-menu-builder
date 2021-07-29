@@ -119,8 +119,8 @@ class MenuBuilder extends Tool
 
     public static function getMenusTableNameWithConnection()
     {
-        $table_name = self::getMenusConnectionName();
-        $connection = self::getMenusTableName();
+        $connection = self::getMenusConnectionName();
+        $table_name = self::getMenusTableName();
         if ($connection) {
             $table_name = "{$connection}.{$table_name}";
         }
