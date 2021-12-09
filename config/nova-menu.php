@@ -13,6 +13,7 @@ return [
     | Table names
     |--------------------------------------------------------------------------
     */
+
     'menus_table_name' => 'nova_menu_menus',
     'menu_items_table_name' => 'nova_menu_menu_items',
 
@@ -37,6 +38,7 @@ return [
     | or a callable (ie 'locales' => 'nova_get_locales').
     |
     */
+
     'locales' => ['en_US' => 'English'],
 
 
@@ -52,6 +54,7 @@ return [
     | For example: ['header' => ['name' => 'Header', 'unique' => true, 'menu_item_types' => []]]
     |
     */
+
     'menus' => [
         // 'header' => [
         //     'name' => 'Header',
@@ -61,13 +64,12 @@ return [
         // ]
     ],
 
-
     /*
     |--------------------------------------------------------------------------
     | Menu item types
     |--------------------------------------------------------------------------
     |
-    | Set all the custom menu item types in an array.
+    | Set all the available menu item types as an array.
     |
     */
     'menu_item_types' => [],
@@ -88,6 +90,7 @@ return [
     | Optionally override the original Menu resource.
     |
     */
+
     'resource' => OptimistDigital\MenuBuilder\Nova\Resources\MenuResource::class,
 
 
@@ -99,6 +102,7 @@ return [
     | Optionally override the original Menu model.
     |
     */
+
     'menu_model' => OptimistDigital\MenuBuilder\Models\Menu::class,
 
 
@@ -110,6 +114,7 @@ return [
     | Optionally override the original Menu Item model.
     |
     */
+
     'menu_item_model' => OptimistDigital\MenuBuilder\Models\MenuItem::class,
 
 
@@ -121,5 +126,8 @@ return [
     | Allow auto-loading of migrations (without the need to publish them)
     |
     */
+
     'auto_load_migrations' => true,
+
+
 ];
