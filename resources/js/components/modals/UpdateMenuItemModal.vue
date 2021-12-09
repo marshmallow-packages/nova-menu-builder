@@ -113,10 +113,12 @@
           <component
             v-for="(field, i) in fields"
             :is="`form-${field.component}`"
-            :key="i"
+            :key="`${linkType.class}_${i}`"
             :field="field"
             :resource-id="resourceId"
             :resource-name="resourceName"
+            :errors="errors"
+            :show-errors="true"
             class="menu-item-component border-t border-40 remove-bottom-border"
           />
         </div>
@@ -160,8 +162,11 @@
 <script>
 import Modal from './Modal';
 import Multiselect from 'vue-multiselect';
+import { HandlesValidationErrors } from 'laravel-nova';
+import { Errors } from 'form-backend-validation';
 
 export default {
+  mixins: [HandlesValidationErrors],
   props: [
     'newItem',
     'showModal',
@@ -170,7 +175,6 @@ export default {
     'menuItemTypes',
     'resourceName',
     'resourceId',
-    'errors',
     'isMenuItemUpdating',
   ],
   components: { Modal, Multiselect },
@@ -194,10 +198,18 @@ export default {
     },
 
     fields() {
+      let fields = this.linkType.fields;
       if (this.update) {
-        return this.linkType.class === this.newItem.class ? this.newItem.fields : this.linkType.fields;
+        fields = this.linkType.class === this.newItem.class ? this.newItem.fields : this.linkType.fields;
       }
-      return this.linkType.fields || [];
+
+      return fields || [];
+    },
+
+    errors() {
+      const ogErrors = this.$props.errors;
+      if (ogErrors && typeof ogErrors.has === 'function') return ogErrors;
+      return new Errors(ogErrors || {});
     },
   },
 
@@ -210,18 +222,18 @@ export default {
         const values = Array.from(formData.values());
 
         if (field.component === 'trix-field') {
-          this.newItem[field.attribute] = values[0];
+          this.$set(this.newItem, field.attribute, values[0]);
           return;
         }
 
         // Is array
         const firstKey = Array.from(formData.keys())[0];
         if (firstKey && firstKey.endsWith(']')) {
-          this.newItem[field.attribute] = values || [];
+          this.$set(this.newItem, field.attribute, values || []);
         } else {
-          if (values.length === 0) this.newItem[field.attribute] = void 0;
-          if (values.length === 1) this.newItem[field.attribute] = values[0];
-          if (values.length > 1) this.newItem[field.attribute] = values;
+          if (values.length === 0) this.$set(this.newItem, field.attribute, void 0);
+          if (values.length === 1) this.$set(this.newItem, field.attribute, values[0]);
+          if (values.length > 1) this.$set(this.newItem, field.attribute, values);
         }
       });
 

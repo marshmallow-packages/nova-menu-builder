@@ -5,6 +5,63 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.0.5] - 2021-10-29
+
+### Changed
+
+- Fixed batch updates of MenuItems not triggering observer events
+- Updated packages
+
+## [6.0.4] - 2021-10-07
+
+### Changed
+
+- Fixed fields not resetting when changing link type
+- Updated packages
+
+## [6.0.3] - 2021-10-07
+
+### Changed
+
+- Fixed select and static url types throwing an unexpected validation error
+
+## [6.0.2] - 2021-10-01
+
+### Changed
+
+- Fixed create/update menu item modal not triggering field updates after validation (thanks to [@HeJiaNong](https://github.com/HeJiaNong))
+- Fixed MenuItem using invalid class binding for HasMany relationship definition (thanks to [@ExileofAranei](https://github.com/ExileofAranei))
+- Fixed fields not correctly re-rendering after menu item type change (thanks to [@ExileofAranei](https://github.com/ExileofAranei))
+- Improved validation error displaying logic
+- Updated packages
+
+## [6.0.1] - 2021-09-02
+
+### Changed
+
+- Updated packages
+
+## [6.0.0] - 2021-08-10
+
+### Changed
+
+- Moved default menu item types into config (thanks to [@elerioja](https://github.com/elerioja))
+- Updated packages
+
+### Breaking change
+
+When migrating from 5.X to 6.X, you have to add the default menu item types to your config file if you wish to continue to use them.
+
+The config would look like this:
+
+```php
+'menu_item_types' => [
+  \OptimistDigital\MenuBuilder\MenuItemTypes\MenuItemTextType::class,
+  \OptimistDigital\MenuBuilder\MenuItemTypes\MenuItemStaticURLType::class,
+  // ...
+],
+```
+
 ## [5.3.3] - 2021-06-18
 
 ### Changed

@@ -72,8 +72,11 @@ return [
     | Set all the available menu item types as an array.
     |
     */
-    'menu_item_types' => [],
 
+    'menu_item_types' => [
+        \OptimistDigital\MenuBuilder\MenuItemTypes\MenuItemTextType::class,
+        \OptimistDigital\MenuBuilder\MenuItemTypes\MenuItemStaticURLType::class,
+    ],
 
     /*
     |--------------------------------|
