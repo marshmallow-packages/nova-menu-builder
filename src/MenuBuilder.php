@@ -103,6 +103,13 @@ class MenuBuilder extends Tool
             $dataRules[$key] = $rule;
         }
 
+        $menuItemRules = $menuLinkableClass ? $menuLinkableClass::getRules() : [];
+        $dataRules = [];
+        foreach ($menuItemRules as $key => $rule) {
+            if ($key !== 'value' && !Str::startsWith($key, 'data->')) $key = "data->{$key}";
+            $dataRules[$key] = $rule;
+        }
+
         return array_merge([
             'menu_id' => "required|exists:$menusTableName,id",
             'name' => 'required|min:1',
