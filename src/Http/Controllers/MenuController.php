@@ -12,7 +12,7 @@ class MenuController extends Controller
 {
     public function getMenus(Request $request)
     {
-        return Menu::all()->map(function (Menu $menu) {
+        return MenuBuilder::getMenuClass()::all()->map(function (Menu $menu) {
             return [
                 'id' => $menu->id,
                 'title' => "{$menu->name} ({$menu->slug})",
@@ -36,8 +36,8 @@ class MenuController extends Controller
         $fromLocale = $data['fromLocale'];
         $toLocale = $data['toLocale'];
 
-        $fromMenu = Menu::find($fromMenuId);
-        $toMenu = Menu::find($toMenuId);
+        $fromMenu = MenuBuilder::getMenuClass()::find($fromMenuId);
+        $toMenu = MenuBuilder::getMenuClass()::find($toMenuId);
 
         if (!$fromMenu || !$toMenu) return response()->json(['error' => 'menu_not_found'], 404);
 
